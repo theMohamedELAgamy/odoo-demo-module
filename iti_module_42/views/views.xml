@@ -1,0 +1,94 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="iti_module_42.call_log_list">
+      <field name="name">call lo list</field>
+      <field name="model">iti.call.log</field>
+      <field name="arch" type="xml">
+      <form>
+          <sheet>
+            <group>
+              <field name="timestamp"/>
+              <h1>
+                  <field name="customer"/>
+              </h1>
+              
+                <field name="from_number"/>
+                <field name="to_number"/>
+                <field name="duration"/>
+                <field name="price"/>
+                  <field name="notes"/>
+                  <field name="package_id"/>
+
+
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="iti_module_42.call_log_list">
+      <field name="name">call lo list</field>
+      <field name="model">iti.call.log</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="timestamp"/>
+          <field name="customer"/>
+          <field name="from_number"/>
+          <field name="to_number"/>
+          <field name="duration"/>
+          <field name="price" sum='total'/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="iti_module_42.call_log_action_window">
+      <field name="name">Call logs </field>
+      <field name="res_model">iti.call.log</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="iti_module_42.package_action_window">
+      <field name="name">packeges </field>
+      <field name="res_model">iti.package</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="iti_module_42.action_server">
+      <field name="name">iti_module_42 server</field>
+      <field name="model_id" ref="model_iti_module_42_iti_module_42"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="communication" id="iti_module_42.menu_iti_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="calls" id="iti_module_42.menu_calls" parent="iti_module_42.menu_iti_root"/>
+    <!-- <menuitem name="Menu 2" id="iti_module_42.menu_2" parent="iti_module_42.menu_root"/> -->
+
+    <!-- actions -->
+
+    <menuitem name="call logs" id="iti_module_42.menu_call_logs_list" parent="iti_module_42.menu_calls"
+              action="iti_module_42.call_log_action_window"/>
+    <menuitem name="packeges" id="iti_module_42.iti_packeges" parent="iti_module_42.menu_calls"
+              action="iti_module_42.package_action_window"/>
+
+  </data>
+</odoo>
